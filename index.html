@@ -179,6 +179,35 @@ footer.site{padding:2rem 0 3rem; color:var(--muted); font-size:.9rem}
   .case dd{margin-bottom:.6rem}
   .also,.skills{grid-template-columns:1fr}
 }
+/* Motion */
+.pk{fill:var(--accent)}
+.pk.legacy{fill:var(--muted)}
+.case,.skill,.also div{transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease}
+@media (hover:hover){
+  .case:hover,.skill:hover{transform:translateY(-4px); border-color:var(--accent); box-shadow:0 14px 30px -18px color-mix(in srgb, var(--accent) 55%, transparent)}
+  .btn{transition:transform .2s ease, box-shadow .2s ease}
+  .btn:hover{transform:translateY(-2px); box-shadow:0 10px 22px -12px color-mix(in srgb, var(--accent) 70%, transparent)}
+}
+@media (prefers-reduced-motion: no-preference){
+  .hero > div > *{opacity:0; transform:translateY(16px); animation:rise .75s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero > div > *:nth-child(1){animation-delay:.05s}
+  .hero > div > *:nth-child(2){animation-delay:.15s}
+  .hero > div > *:nth-child(3){animation-delay:.27s}
+  .hero > div > *:nth-child(4){animation-delay:.39s}
+  .hero > div > *:nth-child(5){animation-delay:.51s}
+  .hero .diagram{opacity:0; transform:scale(.97); animation:pop .9s cubic-bezier(.2,.7,.2,1) .35s forwards}
+  @keyframes rise{to{opacity:1; transform:none}}
+  @keyframes pop{to{opacity:1; transform:none}}
+  .badge i{animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb, var(--teal) 55%, transparent)}50%{box-shadow:0 0 0 6px transparent}}
+  .js .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js .reveal.in{opacity:1; transform:none}
+  .nav{transition:box-shadow .3s ease}
+  .nav.scrolled{box-shadow:0 8px 24px -18px rgba(0,0,0,.45)}
+}
+@media (prefers-reduced-motion: reduce){
+  .packets{display:none}
+}
 @media print{
   .nav,.contact .actions,.icon-btn{display:none}
   body{background:#fff}
@@ -231,22 +260,28 @@ footer.site{padding:2rem 0 3rem; color:var(--muted); font-size:.9rem}
           <text x="266" y="48">WebForms (.NET 4.8)</text><text class="sub" x="266" y="68">legacy, kept running</text></g>
         <g class="node key"><rect x="130" y="140" width="200" height="64" rx="10"/>
           <text x="146" y="168">.NET 10 Web API</text><text class="sub" x="146" y="188">Entra ID + legacy JWT</text></g>
-        <path class="wire draw" d="M110 84 V112 H200 V140"/>
-        <path class="wire legacy draw d2" d="M350 84 V112 H260 V140"/>
+        <path id="w1" class="wire draw" d="M110 84 V112 H200 V140"/>
+        <path id="w2" class="wire legacy draw d2" d="M350 84 V112 H260 V140"/>
         <text class="wlabel" x="20" y="124">JWT</text>
         <text class="wlabel" x="358" y="124">same sign-in</text>
-        <path class="wire draw d2" d="M230 204 V246"/>
+        <path id="w3" class="wire draw d2" d="M230 204 V246"/>
         <g class="db"><path d="M150 262 V300 A80 12 0 0 0 310 300 V262"/><ellipse cx="230" cy="262" rx="80" ry="12"/></g>
         <text class="dblabel" x="230" y="292" text-anchor="middle">100+ SQL Server DBs</text>
+        <g class="packets" aria-hidden="true">
+          <circle r="4.5" class="pk"><animateMotion dur="2.2s" begin="1.6s" repeatCount="indefinite"><mpath href="#w1"/></animateMotion></circle>
+          <circle r="4.5" class="pk"><animateMotion dur="2.2s" begin="2.7s" repeatCount="indefinite"><mpath href="#w1"/></animateMotion></circle>
+          <circle r="4" class="pk legacy"><animateMotion dur="2.8s" begin="2s" repeatCount="indefinite"><mpath href="#w2"/></animateMotion></circle>
+          <circle r="4.5" class="pk"><animateMotion dur="1.1s" begin="1.9s" repeatCount="indefinite"><mpath href="#w3"/></animateMotion></circle>
+        </g>
       </svg>
       <figcaption id="dcap">The architecture I work in every day: one codebase, many databases, and a legacy app that keeps running while it's modernized.</figcaption>
     </figure>
   </header>
 
   <dl class="facts" aria-label="At a glance">
-    <div><dt>7+ years</dt><dd>C#, .NET and SQL Server in production</dd></div>
-    <div><dt>20</dt><dd>developers guided on Blazor delivery</dd></div>
-    <div><dt>100+</dt><dd>SQL Server databases served by one codebase</dd></div>
+    <div><dt data-to="7" data-suffix="+ years">7+ years</dt><dd>C#, .NET and SQL Server in production</dd></div>
+    <div><dt data-to="20" data-suffix="">20</dt><dd>developers guided on Blazor delivery</dd></div>
+    <div><dt data-to="100" data-suffix="+">100+</dt><dd>SQL Server databases served by one codebase</dd></div>
     <div><dt>.NET 10</dt><dd>current stack, with Entra ID and Azure</dd></div>
   </dl>
 
@@ -378,6 +413,41 @@ footer.site{padding:2rem 0 3rem; color:var(--muted); font-size:.9rem}
 <footer class="site"><div class="wrap">Roshan K M, Sharjah, UAE. <a href="https://github.com/Roshankm" target="_blank" rel="noopener">GitHub</a></div></footer>
 
 <script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nav=document.querySelector('.nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>8);},{passive:true});
+  if(reduce||!('IntersectionObserver' in window)){return;}
+  document.documentElement.classList.add('js');
+  var groups=[['.facts',0],['.sec-head',0],['.case',90],['.also div',60],['.skill',70],['.job',0],['.side .box',90],['.contact',0]];
+  groups.forEach(function(g){
+    var els=document.querySelectorAll(g[0]);
+    for(var i=0;i<els.length;i++){els[i].classList.add('reveal'); els[i].style.transitionDelay=(Math.min(i,5)*g[1])+'ms';}
+  });
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting){return;}
+      en.target.classList.add('in');
+      io.unobserve(en.target);
+      if(en.target.classList.contains('facts')){countUp(en.target);}
+    });
+  },{threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+  var rv=document.querySelectorAll('.reveal');
+  for(var j=0;j<rv.length;j++){io.observe(rv[j]);}
+  function countUp(box){
+    var dts=box.querySelectorAll('dt[data-to]');
+    for(var k=0;k<dts.length;k++){(function(dt){
+      var to=parseInt(dt.getAttribute('data-to'),10), suf=dt.getAttribute('data-suffix'), t0=null;
+      function step(ts){
+        if(!t0){t0=ts;}
+        var p=Math.min((ts-t0)/1200,1), e=1-Math.pow(1-p,3);
+        dt.textContent=Math.round(to*e)+suf;
+        if(p<1){requestAnimationFrame(step);}
+      }
+      requestAnimationFrame(step);
+    })(dts[k]);}
+  }
+})();
 (function(){
   var btn=document.getElementById('themeBtn');
   btn.addEventListener('click',function(){
