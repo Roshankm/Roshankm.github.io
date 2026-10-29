@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roshan K M – Senior Software Engineer (.NET, Blazor, SQL Server)</title>
+<meta name="description" content="Roshan K M, Senior Software Engineer in Sharjah, UAE. .NET 10, Blazor WebAssembly, ASP.NET Core Web API, SQL Server, Microsoft Entra ID.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F6F8; --surface:#FFFFFF; --ink:#1A1D29; --muted:#565D70;
+  --line:#D9DCE3; --accent:#5B3FD6; --accent-soft:#ECE8FC;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#14151C; --surface:#1C1E27; --ink:#E8E9EE; --muted:#A3A8B8;
+    --line:#2E313D; --accent:#A492FF; --accent-soft:#272246; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14151C; --surface:#1C1E27; --ink:#E8E9EE; --muted:#A3A8B8;
+  --line:#2E313D; --accent:#A492FF; --accent-soft:#272246; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size:1.0625rem; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent); text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent); outline-offset:3px; border-radius:4px}
+.wrap{max-width:68rem; margin:0 auto; padding:0 1.5rem}
+
+/* Hero */
+.hero{display:grid; grid-template-columns:1.05fr 1fr; gap:3rem; align-items:center; padding:5rem 0 4rem}
+.hero h1{font-size:clamp(2.4rem,5.2vw,4rem); line-height:1.02; font-weight:800; letter-spacing:-0.035em; margin:0 0 1.25rem}
+.hero .role{font-size:1.2rem; font-weight:500; margin:0 0 1rem}
+.hero p.lede{color:var(--muted); max-width:34rem; margin:0 0 2rem}
+.actions{display:flex; flex-wrap:wrap; gap:.75rem}
+.btn{display:inline-block; padding:.7rem 1.15rem; border-radius:8px; font-weight:700; text-decoration:none; border:2px solid var(--accent)}
+.btn.primary{background:var(--accent); color:var(--paper)}
+.btn.ghost{color:var(--accent)}
+.where{margin-top:1.5rem; font-size:.95rem; color:var(--muted)}
+
+/* Diagram */
+.diagram{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:1.25rem}
+.diagram svg{display:block; width:100%; height:auto}
+.diagram figcaption{font-size:.9rem; color:var(--muted); margin-top:.75rem}
+.node rect{fill:var(--paper); stroke:var(--line); stroke-width:1.5}
+.node.key rect{fill:var(--accent-soft); stroke:var(--accent)}
+.node text{fill:var(--ink); font-family:inherit; font-size:15px; font-weight:700}
+.node text.sub{font-weight:400; font-size:12.5px; fill:var(--muted)}
+.db ellipse,.db path{fill:var(--paper); stroke:var(--accent); stroke-width:1.5}
+.wire{fill:none; stroke:var(--accent); stroke-width:2}
+.wire.legacy{stroke:var(--muted); stroke-dasharray:6 5}
+.wlabel{fill:var(--muted); font-size:12px; font-family:inherit}
+@media (prefers-reduced-motion: no-preference){
+  .wire.draw{stroke-dasharray:400; stroke-dashoffset:400; animation:draw 1.2s ease-out forwards}
+  .wire.draw.d2{animation-delay:.5s}
+  @keyframes draw{to{stroke-dashoffset:0}}
+}
+
+/* Sections */
+section{padding:3.5rem 0; border-top:1px solid var(--line)}
+h2{font-size:clamp(1.6rem,3vw,2.1rem); letter-spacing:-0.02em; line-height:1.15; margin:0 0 .5rem}
+.intro{color:var(--muted); max-width:40rem; margin:0 0 2.25rem}
+
+/* Decision records */
+.decisions{display:grid; gap:1.25rem}
+.decision{background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:6px 12px 12px 6px; padding:1.5rem 1.75rem}
+.decision h3{font-size:1.3rem; margin:0 0 .25rem; letter-spacing:-0.01em}
+.decision .stack{color:var(--muted); font-size:.95rem; margin:0 0 1.1rem}
+.decision dl{display:grid; grid-template-columns:7.5rem 1fr; gap:.55rem 1.25rem; margin:0}
+.decision dt{font-weight:700}
+.decision dd{margin:0; max-width:46rem}
+.status{display:inline-block; font-size:.85rem; font-weight:700; color:var(--accent); background:var(--accent-soft); padding:.1rem .55rem; border-radius:99px; margin-left:.5rem; vertical-align:middle}
+
+/* Skills + experience */
+.two{display:grid; grid-template-columns:1fr 1fr; gap:3rem}
+.skills{margin:0; display:grid; grid-template-columns:9.5rem 1fr; gap:.7rem 1.25rem}
+.skills dt{font-weight:700}
+.skills dd{margin:0; color:var(--muted)}
+.job h3{margin:0; font-size:1.2rem}
+.job .meta{color:var(--muted); margin:.15rem 0 1rem}
+.job ul{margin:0; padding-left:1.15rem}
+.job li{margin-bottom:.5rem}
+
+footer{border-top:1px solid var(--line); padding:3rem 0 4rem}
+footer h2{margin-bottom:.75rem}
+footer p{color:var(--muted); max-width:36rem}
+
+@media (max-width: 860px){
+  .hero{grid-template-columns:1fr; padding:3rem 0 2.5rem; gap:2rem}
+  .two{grid-template-columns:1fr; gap:2.5rem}
+}
+@media (max-width: 520px){
+  .decision{padding:1.25rem}
+  .decision dl,.skills{grid-template-columns:1fr; gap:.15rem}
+  .decision dd,.skills dd{margin-bottom:.6rem}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header class="hero">
+    <div>
+      <h1>Roshan K M</h1>
+      <p class="role">Senior Software Engineer: .NET, Blazor and SQL Server</p>
+      <p class="lede">I build school-management and enterprise software that runs across 100+ SQL Server databases. I modernize legacy ASP.NET WebForms systems step by step, without a risky rewrite, and I guide a team of 20 developers on Blazor.</p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:roshankm981@gmail.com">Email me</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/roshan-k-m-94a28a159/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/Roshankm" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <p class="where">Based in Sharjah, UAE.</p>
+    </div>
+
+    <figure class="diagram" aria-labelledby="dcap">
+      <svg viewBox="0 0 460 330" role="img" aria-labelledby="dtitle">
+        <title id="dtitle">Architecture I design: a Blazor WebAssembly app calls a .NET 10 Web API, which serves 100+ SQL Server databases. The legacy WebForms system shares the same Microsoft Entra ID sign-in.</title>
+        <g class="node key"><rect x="10" y="20" width="200" height="64" rx="10"/>
+          <text x="26" y="48">Blazor WebAssembly</text><text class="sub" x="26" y="68">runs in the browser, no SignalR</text></g>
+        <g class="node"><rect x="250" y="20" width="200" height="64" rx="10"/>
+          <text x="266" y="48">WebForms (.NET 4.8)</text><text class="sub" x="266" y="68">legacy system, kept running</text></g>
+        <g class="node key"><rect x="130" y="140" width="200" height="64" rx="10"/>
+          <text x="146" y="168">.NET 10 Web API</text><text class="sub" x="146" y="188">Entra ID + legacy JWT</text></g>
+        <path class="wire draw" d="M110 84 V112 H200 V140"/>
+        <path class="wire legacy draw d2" d="M350 84 V112 H260 V140"/>
+        <text class="wlabel" x="20" y="124">JWT</text>
+        <text class="wlabel" x="358" y="124">same sign-in</text>
+        <path class="wire draw d2" d="M230 204 V246"/>
+        <g class="db">
+          <path d="M150 262 V300 A80 12 0 0 0 310 300 V262"/>
+          <ellipse cx="230" cy="262" rx="80" ry="12"/>
+        </g>
+        <text class="node" x="230" y="292" text-anchor="middle" style="fill:var(--ink);font-weight:700;font-size:15px">100+ SQL Server DBs</text>
+      </svg>
+      <figcaption id="dcap">The shape of most systems I work on: one codebase, many branch and customer databases, and a legacy app that keeps working while it's modernized.</figcaption>
+    </figure>
+  </header>
+
+  <section aria-labelledby="dec">
+    <h2 id="dec">Decisions I've made</h2>
+    <p class="intro">Each project below is written the way I'd document it for my team: the situation, what I chose, and why.</p>
+
+    <div class="decisions">
+      <article class="decision">
+        <h3>Teachers Portal</h3>
+        <p class="stack">Blazor WebAssembly, .NET 10 Web API, Syncfusion, SQL Server, IIS</p>
+        <dl>
+          <dt>Context</dt><dd>Teachers needed one dashboard for feeds, mail, timetable and calendar, built for large-scale concurrent use.</dd>
+          <dt>Decision</dt><dd>Standalone Blazor WebAssembly instead of Blazor Server, with a separate .NET 10 API secured by JWT and a custom AuthenticationStateProvider.</dd>
+          <dt>Why</dt><dd>Blazor Server keeps a live SignalR circuit per user on the server. Moving the UI to the browser keeps server load flat at peak times.</dd>
+        </dl>
+      </article>
+
+      <article class="decision">
+        <h3>Microsoft Entra ID single sign-on <span class="status">In progress</span></h3>
+        <p class="stack">Entra ID, OWIN, ASP.NET WebForms, .NET 10</p>
+        <dl>
+          <dt>Context</dt><dd>An established WebForms login had to move to Microsoft sign-in without locking anyone out.</dd>
+          <dt>Decision</dt><dd>A phased rollout: users matched by their immutable Entra object ID, and an API that accepts both Entra tokens and legacy JWTs.</dd>
+          <dt>Why</dt><dd>Existing logins keep working during the migration, so each phase can ship on its own.</dd>
+        </dl>
+      </article>
+
+      <article class="decision">
+        <h3>One codebase, 100+ databases</h3>
+        <p class="stack">SQL Server, C#</p>
+        <dl>
+          <dt>Context</dt><dd>Each school branch and customer has its own SQL Server database on a shared instance.</dd>
+          <dt>Decision</dt><dd>Data access designed so the same application code serves every branch and client database.</dd>
+          <dt>Why</dt><dd>New features ship once instead of per branch, and every database stays isolated.</dd>
+        </dl>
+      </article>
+
+      <article class="decision">
+        <h3>Schema audit and repair</h3>
+        <p class="stack">SQL Server</p>
+        <dl>
+          <dt>Context</dt><dd>Core teacher and student-set tables had grown without enforced relationships.</dd>
+          <dt>Decision</dt><dd>Audited the schema and shipped a corrected script: foreign keys, indexes on FK columns, uniqueness and concurrency controls, and fixed type mismatches.</dd>
+          <dt>Why</dt><dd>The database now rejects bad data itself instead of relying on every screen to check.</dd>
+        </dl>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="exp">
+    <div class="two">
+      <div>
+        <h2 id="exp">Experience</h2>
+        <div class="job">
+          <h3>Senior Software Engineer</h3>
+          <p class="meta">Orison Software Specialists, Sharjah. Sept 2019 to present</p>
+          <ul>
+            <li>Guide 20 developers on Blazor delivery: architecture, standards, code reviews and the move from WebForms.</li>
+            <li>Delivered Finance, CRM, Recruitment, Logistics and Document Management modules, plus an e-commerce portal with payment-gateway integration.</li>
+            <li>Maintain the parent web portal and mobile app; building user activity tracking across both.</li>
+            <li>Resolve production incidents end to end, from root cause to query tuning and fix.</li>
+          </ul>
+        </div>
+        <p style="margin-top:1.5rem;color:var(--muted)">B.Tech, Electronics and Communication Engineering, University of Calicut, 2019.</p>
+      </div>
+      <div>
+        <h2 id="skl">What I work with</h2>
+        <dl class="skills" aria-labelledby="skl">
+          <dt>Languages</dt><dd>C#, T-SQL, JavaScript, HTML, CSS</dd>
+          <dt>Frameworks</dt><dd>.NET 10, ASP.NET Core Web API, Blazor WebAssembly and Server, ASP.NET WebForms, Entity Framework Core</dd>
+          <dt>Data</dt><dd>SQL Server schema design, indexing, query tuning, multi-database architecture</dd>
+          <dt>Identity</dt><dd>Microsoft Entra ID SSO, OWIN, JWT, role-based authorization</dd>
+          <dt>Platform</dt><dd>Azure, AWS, Azure DevOps, Git, IIS</dd>
+          <dt>Reporting and UI</dt><dd>SSRS, Bold Reports, Crystal Reports, Syncfusion, DevExpress</dd>
+          <dt>AI tools</dt><dd>Claude Code, GitHub Copilot</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <h2>Get in touch</h2>
+    <p>The quickest way to reach me is email or LinkedIn.</p>
+    <div class="actions">
+      <a class="btn primary" href="mailto:roshankm981@gmail.com">Email me</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/roshan-k-m-94a28a159/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+
+</main>
+</body>
+</html>
